@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: snow;
+}
+.btn-primary {
+  background-color: #3c8db1;
+}
+.btn-primary:hover {
+  background-color: #749eb0;
+}
+.primary-text {
+  color: #3c8db1;
+}

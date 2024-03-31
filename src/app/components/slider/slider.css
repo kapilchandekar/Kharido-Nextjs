@@ -1,0 +1,19 @@
+.h_24_rem {
+  height: 7rem;
+}
+@media screen and (min-width: 1024px) {
+  .h_24_rem {
+    height: 24rem;
+  }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 1023px) {
+  .h_24_rem {
+    height: 18rem;
+  }
+}
+@media screen and (min-device-width: 376px) and (max-device-width: 481px) {
+  .h_24_rem {
+    height: 10rem;
+  }
+}

@@ -4,27 +4,34 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 
-import logo from "../../Assets/logo1.png";
+import logo from "../../Assets/logo2.png";
+import SideBar from "../sideBar/sideBar";
 
-const Header = () => {
+const Header = ({ setOpen }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   return (
     <div>
-      <header class="bg-white">
+      <header>
         <nav
-          class="mx-auto flex  items-center justify-between py-1  lg:px-8"
+          class="mx-auto flex items-center justify-between  bg-pink  bgitems-center  py-1  lg:px-8"
           aria-label="Global"
         >
           <div class="flex lg:flex-1">
             <Link href="/" class="-m-1.5 p-1.5">
-              <Image src={logo} alt="Kharido" width={140} />
+              <Image src={logo} alt="Kharido" width={190} />
             </Link>
           </div>
-          <div class="flex lg:hidden">
+          <div class="flex lg:hidden items-center">
+            <FaShoppingCart
+              className="mr-2 primary-text text-2xl"
+              onClick={() => setSideBarOpen(true)}
+            />
+
             <button
               type="button"
-              class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              class="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span class="sr-only">Open main menu</span>
@@ -67,13 +74,14 @@ const Header = () => {
           <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-2.5">
             <button
               type="submit"
-              className="flex  justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex  justify-center rounded-md btn-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Logout
             </button>
             <button
               type="submit"
-              className="flex items-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm btn-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => setSideBarOpen(true)}
             >
               Cart
               <FaShoppingCart className="ml-1" />
@@ -90,9 +98,9 @@ const Header = () => {
           <div class="fixed inset-0 z-10"></div>
           <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div class="flex items-center justify-between">
-            <Link href="/" class="-m-1.5 p-1.5">
-              <Image src={logo} alt="Kharido" width={140} />
-            </Link>
+              <Link href="/" class="-m-1.5 p-1.5">
+                <Image src={logo} alt="Kharido" width={140} />
+              </Link>
               <button
                 type="button"
                 class="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -149,6 +157,7 @@ const Header = () => {
           </div>
         </div>
       </header>
+      <SideBar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
     </div>
   );
 };

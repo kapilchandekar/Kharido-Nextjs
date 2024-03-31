@@ -1,14 +1,14 @@
-import React from 'react'
-import Image from 'next/image'
-
-import banner from "../Assets/banner.jpg"
+import React from "react";
+import Slider from "../components/slider/slider";
 
 const home = () => {
   return (
     <div>
-      <Image src={banner} alt="Kharido" />
+      <div className="">
+       <Slider/>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default home
+export default home;
