@@ -1,6 +1,7 @@
 "use client";
 
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 import { useGetProductByIdQuery } from "@/lib/productSlice/productSlice";
 import { addToCart } from "@/lib/productSlice/cartSlice";
 
@@ -14,8 +15,6 @@ const product = ({ params }) => {
     dispatch(addToCart(item));
   };
 
-  console.log("env", process.env.STRIPE_SECRET_KEY);
-
   return (
     <div>
       <section
@@ -25,10 +24,12 @@ const product = ({ params }) => {
         <div class="container px-5 py-24 mx-auto">
           <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <div className="lg:w-1/2 lg:h-90 ">
-              <img
+              <Image
                 alt="ecommerce"
                 class=" w-full lg:h-auto h-64 object-cover object-center rounded"
                 src={productDetails?.img}
+                width={500}
+                height={500}
               />
             </div>
             <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

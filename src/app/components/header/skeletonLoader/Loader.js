@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = () => {
+const skeletonLoader = () => {
   return (
     <div
       role="status"
@@ -26,4 +26,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default skeletonLoader;

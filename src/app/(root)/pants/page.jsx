@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+
 import { getProductsApi } from "@/lib/productSlice/productSlice";
 
 
@@ -34,7 +36,7 @@ const pant = () => {
                     className="bg-gray-100 p-6 rounded-lg min-h-full "
                   >
                     <div className="h-80">
-                      <img
+                   <Image
                         className="rounded w-full object-cover object-center h-full mb-6"
                         src={item?.img}
                         alt="content"

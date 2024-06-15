@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useGetProductsQuery } from "@/lib/productSlice/productSlice";
-import Loader from "@/app/components/header/skeletonLoader/loader";
+import skeletonLoader from "@/app/components/header/skeletonLoader/Loader";
+
+
 
 const hoddies = () => {
   const { data, isLoading } = useGetProductsQuery(null);
@@ -14,7 +17,7 @@ const hoddies = () => {
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
-            {isLoading && <Loader />}
+            {isLoading && skeletonLoader}
             {hoodiesList?.map((item) => (
               <Link className="contents" href={`/product/${item?._id}`}>
                 <div className="xl:w-1/4 md:w-1/2 p-4">
@@ -23,10 +26,12 @@ const hoddies = () => {
                     className="bg-gray-100 p-6 rounded-lg min-h-full "
                   >
                     <div className="h-80">
-                      <img
+                      <Image
                         className="rounded w-full object-cover object-center h-full mb-6"
                         src={item?.img}
                         alt="content"
+                        width={500}
+                        height={500}
                       />
                     </div>
 

@@ -15,9 +15,9 @@ import {
   selectTotalAmount,
 } from "@/lib/productSlice/cartSlice";
 import emptyCartImg from "../../Assets/marketing.png";
-import "./sideBar.css";
 import { useGetUserQuery } from "@/lib/userSlice/userSlice";
 import { BASE_URL } from "@/http";
+import "./sideBar.css";
 
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const dispatch = useDispatch();
@@ -112,7 +112,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
                           <div className="mt-8">
                             {cartItems?.length === 0 && (
                               <div className="mt-20">
-                                <Image src={emptyCartImg} />
+                                <Image src={emptyCartImg} width={500} height={500} />
                               </div>
                             )}
                             <div className="flow-root">
@@ -124,10 +124,12 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
                                   cartItems?.map((item) => (
                                     <li key={item?._id} className="flex py-6">
                                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                        <img
+                                        <Image
                                           src={item.img}
                                           alt="img"
                                           className="h-full w-full object-cover object-center"
+                                          width={500}
+                                          height={500}
                                         />
                                       </div>
 
