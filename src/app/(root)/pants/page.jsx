@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import getProducts from "@/lib/getAllProducts";
+import { getProductsApi } from "@/lib/productSlice/productSlice";
+
 
 const pant = () => {
   const [pantList, setPantList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productList = await getProducts();
+        const productList = await getProductsApi();
         setPantList(
           productList?.result.filter((item) => item?.category === "pant")
         );

@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 //   description: "It is shopping website",
 // };
 
-export default function RootLayout({ children, ...props }) {
+export default function RootLayout({ children}) {
   return (
     <html lang="en">
       <body className={inter.className}>
