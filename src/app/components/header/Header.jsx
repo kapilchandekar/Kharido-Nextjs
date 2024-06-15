@@ -3,19 +3,34 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { BiUser } from "react-icons/bi";
 
 import logo from "../../Assets/logo2.png";
 import SideBar from "../sideBar/sideBar";
+import AlertModal from "../modal/alertModal";
+import logout from "../../../hooks/useLogout";
+import { useGetUserQuery } from "@/lib/userSlice/userSlice";
+import "../../globals.css";
+import "./Header.css";
 
-const Header = ({ setOpen }) => {
+const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { data, isLoading } = useGetUserQuery(null);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.reload();
+  };
 
   return (
     <div>
       <header>
         <nav
-          class="mx-auto flex items-center justify-between  bg-pink  bgitems-center  py-1  lg:px-8"
+          class=" mx-auto flex items-center justify-between bgitems-center  py-6  lg:px-8"
           aria-label="Global"
         >
           <div class="flex lg:flex-1">
@@ -28,6 +43,7 @@ const Header = ({ setOpen }) => {
               className="mr-2 primary-text text-2xl"
               onClick={() => setSideBarOpen(true)}
             />
+              <BiUser className="text-2xl ml-1" />
 
             <button
               type="button"
@@ -71,12 +87,19 @@ const Header = ({ setOpen }) => {
               Sneakers
             </Link>
           </div>
-          <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-2.5">
+          <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-2.5 items-center">
             <button
               type="submit"
               className="flex  justify-center rounded-md btn-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => {
+                if (data?.user) {
+                  setModalOpen(true);
+                } else {
+                  router.push("/login");
+                }
+              }}
             >
-              Logout
+              {data?.user ? "Logout" : "Login"}
             </button>
             <button
               type="submit"
@@ -86,6 +109,7 @@ const Header = ({ setOpen }) => {
               Cart
               <FaShoppingCart className="ml-1" />
             </button>
+          <BiUser className="text-4xl ml-6 " />
           </div>
         </nav>
         {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
@@ -148,8 +172,17 @@ const Header = ({ setOpen }) => {
                   </div>
                 </div>
                 <div class="py-6">
-                  <button class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-pink-700 hover:bg-gray-50">
-                    Log in
+                  <button
+                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-pink-700 hover:bg-gray-50"
+                    onClick={() => {
+                      if (data?.user) {
+                        setModalOpen(true);
+                      } else {
+                        router.push("/login");
+                      }
+                    }}
+                  >
+                    {data?.user ? "Logout" : "Login"}
                   </button>
                 </div>
               </div>
@@ -157,6 +190,13 @@ const Header = ({ setOpen }) => {
           </div>
         </div>
       </header>
+      <AlertModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        title="Logout"
+        subTitle="Are you sure you want to logout your account?"
+        handleClick={handleLogout}
+      />
       <SideBar sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
     </div>
   );

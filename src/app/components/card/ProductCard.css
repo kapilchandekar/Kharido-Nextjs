@@ -1,0 +1,25 @@
+.card-img {
+  transition: 0.3s ease;
+}
+
+/*Button*/
+.card-button {
+  border: 1px solid #252525;
+  display: flex;
+  padding: 0.3em;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: 0.3s ease-in-out;
+}
+
+/*Hover*/
+.card-img:hover {
+  transform: translateY(-10%);
+  box-shadow: rgb(60, 141, 177, 0.5) 0px 13px 47px -5px,
+    rgba(60, 141, 177, 0.3) 0px 8px 16px -8px;
+}
+
+.card-button:hover {
+  border: 1px solid #3c8db1;
+  background-color: #3c8db1;
+}

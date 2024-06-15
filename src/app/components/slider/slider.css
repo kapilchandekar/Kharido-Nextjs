@@ -1,19 +1,26 @@
+/* slider.css */
 .h_24_rem {
-  height: 7rem;
+  height: 24rem;
 }
-@media screen and (min-width: 1024px) {
+
+@media (min-width: 768px) {
   .h_24_rem {
-    height: 24rem;
+    height: 32rem;
   }
 }
 
-@media screen and (min-device-width: 481px) and (max-device-width: 1023px) {
+@media (min-width: 1024px) {
   .h_24_rem {
-    height: 18rem;
+    height: 40rem;
   }
 }
-@media screen and (min-device-width: 376px) and (max-device-width: 481px) {
+
+@media (min-width: 1280px) {
   .h_24_rem {
-    height: 10rem;
+    height: 48rem;
   }
+}
+
+.border_radious_none {
+  border-radius: 0;
 }
