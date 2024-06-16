@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import mongoose from "mongoose";f
+import mongoose from "mongoose";
 import { sendEmail } from "@/helper/mailer";
 import { user } from "@/lib/model/user";
 
