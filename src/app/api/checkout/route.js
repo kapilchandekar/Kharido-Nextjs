@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/http";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export const POST = async (request) => {
