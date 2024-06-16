@@ -1,7 +1,7 @@
+import { NextResponse } from "next/server";
+import mongoose from "mongoose";f
 import { sendEmail } from "@/helper/mailer";
 import { user } from "@/lib/model/user";
-import mongoose from "mongoose";
-import { NextResponse } from "next/server";
 
 const connectDB = process.env.NEXT_PUBLIC_DATA_BASE;
 
