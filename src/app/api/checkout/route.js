@@ -28,7 +28,7 @@ export const POST = async (request) => {
       mode: "payment",
       success_url:
         `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_APP_BASE_URL}`,
+      cancel_url: BASE_URL,
       metadata: {
         email,
       },
