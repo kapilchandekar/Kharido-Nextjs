@@ -112,7 +112,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
                           <div className="mt-8">
                             {cartItems?.length === 0 && (
                               <div className="mt-20">
-                                <Image src={emptyCartImg} width={500} height={500} />
+                                <Image src={emptyCartImg} alt="EmptyCard" width={500} height={500} />
                               </div>
                             )}
                             <div className="flow-root">
