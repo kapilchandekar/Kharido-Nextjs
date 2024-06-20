@@ -25,6 +25,8 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const { data } = useGetUserQuery(null);
 
+  const email = data?.user.email
+
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -46,7 +48,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: cartItems,
-          email: data?.user?.email,
+          email: email
         }),
       });
       const data = await response.json();
