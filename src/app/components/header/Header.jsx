@@ -12,14 +12,21 @@ import AlertModal from "../modal/alertModal";
 import logout from "../../../hooks/useLogout";
 import { useGetUserQuery } from "@/lib/userSlice/userSlice";
 import "../../globals.css";
+import CustomLink from "./CustomLink";
 import "./Header.css";
 
 const Header = () => {
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const { data, isLoading } = useGetUserQuery(null);
-  const router = useRouter();
+  const { data} = useGetUserQuery(null);
+
+  const navItems = [
+    { name: "T-Shirts", href: "/tshirts" },
+    { name: "Hoddies", href: "/hoddies" },
+    { name: "Sneakers", href: "/sneakers" },
+  ];
 
   const handleLogout = async () => {
     await logout();
@@ -43,7 +50,7 @@ const Header = () => {
               className="mr-2 primary-text text-2xl"
               onClick={() => setSideBarOpen(true)}
             />
-              <BiUser className="text-2xl ml-1" />
+            <BiUser className="text-2xl ml-1" />
 
             <button
               type="button"
@@ -67,25 +74,12 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          <div class="hidden lg:flex lg:gap-x-12">
-            <Link
-              href="/tshirts"
-              class="text-sm font-semibold leading-6 text-gray-900"
-            >
-              T-Shirts
-            </Link>
-            <Link
-              href="/hoddies"
-              class="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Hoddies
-            </Link>
-            <Link
-              href="/sneakers"
-              class="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Sneakers
-            </Link>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navItems.map((item) => (
+              <CustomLink key={item.name}  href={item.href}>
+                {item.name}
+              </CustomLink>
+            ))}
           </div>
           <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-2.5 items-center">
             <button
@@ -109,7 +103,7 @@ const Header = () => {
               Cart
               <FaShoppingCart className="ml-1" />
             </button>
-          <BiUser className="text-4xl ml-6 " />
+            <BiUser className="text-4xl ml-6 " />
           </div>
         </nav>
         {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
@@ -150,30 +144,17 @@ const Header = () => {
             <div class="mt-6 flow-root">
               <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
-                  <div class="-mx-3">
-                    <Link
-                      href="/tshirts"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      T-Shirts
-                    </Link>
-                    <Link
-                      href="/hoddies"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      Hoddies
-                    </Link>
-                    <Link
-                      href="/sneakers"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      Sneakers
-                    </Link>
+                  <div class="flex flex-col space-y-6">
+                    {navItems.map((item) => (
+                      <CustomLink key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                        {item.name}
+                      </CustomLink> 
+                    ))}
                   </div>
                 </div>
                 <div class="py-6">
                   <button
-                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-pink-700 hover:bg-gray-50"
+                    class="block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-pink-700 hover:bg-gray-50"
                     onClick={() => {
                       if (data?.user) {
                         setModalOpen(true);

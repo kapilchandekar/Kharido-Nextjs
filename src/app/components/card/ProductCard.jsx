@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 import "./ProductCard.css";
@@ -40,7 +39,7 @@ const ProductCard = () => {
       <div class="container lg:px-8 px-4 py-10 mx-auto">
         <div class="flex flex-wrap -m-4">
           {product?.map((item) => (
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div class="lg:w-1/4 md:w-1/2 p-4">
               <div className="h-80">
                 <a class="block relative rounded overflow-hidden h-full card-img">
                   <Image

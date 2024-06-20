@@ -1,8 +1,8 @@
 "use client";
-
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { useGetProductByIdQuery } from "@/lib/productSlice/productSlice";
+
 import { addToCart } from "@/lib/productSlice/cartSlice";
 
 const product = ({ params }) => {

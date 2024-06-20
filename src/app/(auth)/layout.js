@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body>
         <StoreProvider>
           <Toaster />
-          {loading ? <PreLoader /> : <AuthWrapper>{children}</AuthWrapper>}
+          <AuthWrapper>{loading ? <PreLoader/> : children}</AuthWrapper>
         </StoreProvider>
       </body>
     </html>

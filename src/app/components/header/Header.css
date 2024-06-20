@@ -1,3 +1,7 @@
 nav{
     max-width: 1200px;
 }
+.active-link {
+    color: #d21616 !important;
+    border-bottom: 2px solid #000; /* Example style for active link */
+  }

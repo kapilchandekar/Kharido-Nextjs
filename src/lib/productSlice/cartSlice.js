@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const getInitialCartItems = () => {
   if (typeof window !== 'undefined') {
@@ -21,11 +22,13 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const item = action.payload;
       if (state.cartItems.find((i) => i._id === item._id)) {
-        alert("Item Already Existing in Cart");
+        toast.error("Item Already Existing in Cart");
       } else {
         state.cartItems = [...state.cartItems, item];
         if (typeof window !== 'undefined') {
           localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+          toast.success("Item Added in Cart");
+
         }
       }
     },
