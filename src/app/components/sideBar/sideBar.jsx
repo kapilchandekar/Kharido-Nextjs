@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { Button } from "@material-tailwind/react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 import {
   decreaseQuantity,
@@ -21,6 +22,8 @@ import "./sideBar.css";
 
 const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { data } = useGetUserQuery(null);
@@ -59,7 +62,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
         toast.error("Failed to create Stripe session");
       }
     } else {
-      toast.error("Please sign in to make Checkout");
+      router.push('/login');
     }
   };
 

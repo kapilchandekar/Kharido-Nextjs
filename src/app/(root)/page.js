@@ -1,5 +1,5 @@
 import Slider from "../components/slider/slider";
-import ProductCard from "../components/card/ProductCard";
+import ProductCard from "../components/card/StaticProductCard";
 
 const home = () => {
   return (

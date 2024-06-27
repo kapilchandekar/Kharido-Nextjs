@@ -21,9 +21,9 @@ const product = ({ params }) => {
         key={productDetails?._id}
         class="text-gray-600 body-font overflow-hidden"
       >
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 pb-5 mx-auto">
           <div class="lg:w-4/5 mx-auto flex flex-wrap">
-            <div className="lg:w-1/2 lg:h-90 ">
+            <div className="lg:w-1/2 lg:h-90 mx-auto ">
               <Image
                 alt="ecommerce"
                 class=" w-full lg:h-auto h-64 object-cover object-center rounded"
