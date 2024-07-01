@@ -8,6 +8,8 @@ import Image from "next/image";
 import { Button } from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 
 import {
   decreaseQuantity,
@@ -27,6 +29,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   const [loading, setLoading] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { data } = useGetUserQuery(null);
+  const { data: session } = useSession();
 
   const email = data?.user.email
 
@@ -43,7 +46,7 @@ const SideBar = ({ sideBarOpen, setSideBarOpen }) => {
   );
 
   const createStripeSession = async () => {
-    if (data?.user) {
+    if (data?.user || session?.user) {
       setLoading(true); // Set loading to true
       const stripe = await stripePromise;
       const response = await fetch(`${BASE_URL}/api/checkout`, {

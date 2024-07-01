@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
+import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "../StoreProvider";
 import AuthWrapper from "./AuthWrapper";
@@ -22,10 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <StoreProvider>
-          <Toaster />
-          <AuthWrapper>{loading ? <PreLoader/> : children}</AuthWrapper>
-        </StoreProvider>
+        <SessionProvider>
+          <StoreProvider>
+            <Toaster />
+            <AuthWrapper>{loading ? <PreLoader /> : children}</AuthWrapper>
+          </StoreProvider>
+        </SessionProvider>
       </body>
     </html>
   );

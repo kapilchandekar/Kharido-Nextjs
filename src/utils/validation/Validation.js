@@ -6,7 +6,6 @@ import {
   OTP_MAX_VALIDATION_ERR,
   PASSWORD_REGEXP,
   PASSWORD_VALIDATION_ERR,
-  REQUIRED_ERR,
 } from "@/constant/validationErrorConstant";
 import * as Yup from "yup";
 
@@ -29,5 +28,7 @@ export const emailValidation = Yup.object({
   email: Yup.string().email(EMAIL_VALLATION_ERR),
 });
 export const otpValidation = Yup.object({
-  otp : Yup.string().min(4, OTP_MAX_VALIDATION_ERR).max(4, OTP_MAX_VALIDATION_ERR),
+  otp: Yup.string()
+    .min(4, OTP_MAX_VALIDATION_ERR)
+    .max(4, OTP_MAX_VALIDATION_ERR),
 });

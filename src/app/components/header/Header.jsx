@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { BiUser } from "react-icons/bi";
+import { useSession, signOut } from "next-auth/react";
 
 import logo from "../../Assets/logo2.png";
 import SideBar from "../sideBar/sideBar";
@@ -20,7 +21,8 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const { data} = useGetUserQuery(null);
+  const { data } = useGetUserQuery(null);
+  const { data: session } = useSession();
 
   const navItems = [
     { name: "T-Shirts", href: "/tshirts" },
@@ -29,13 +31,27 @@ const Header = () => {
   ];
 
   const handleLogout = async () => {
-    await logout();
-    window.location.reload();
+    if (data?.user) {
+      await logout();
+      window.location.reload();
+    } else {
+      signOut();
+    }
   };
 
   return (
     <div>
       <header>
+        {session?.user  && (
+          <div className="text-center mt-2 primary-text">
+            Welcome, {session?.user?.name}{" "}
+          </div>
+        )}
+        {data?.user  && (
+          <div className="text-center mt-2 primary-text">
+            Welcome, {data?.user?.username}{" "}
+          </div>
+        )}
         <nav
           class=" mx-auto flex items-center justify-between bgitems-center  py-6  lg:px-8"
           aria-label="Global"
@@ -45,6 +61,7 @@ const Header = () => {
               <Image src={logo} alt="Kharido" width={190} />
             </Link>
           </div>
+
           <div class="flex lg:hidden items-center">
             <FaShoppingCart
               className="mr-2 primary-text text-2xl"
@@ -76,7 +93,7 @@ const Header = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navItems.map((item) => (
-              <CustomLink key={item.name}  href={item.href}>
+              <CustomLink key={item.name} href={item.href}>
                 {item.name}
               </CustomLink>
             ))}
@@ -86,14 +103,14 @@ const Header = () => {
               type="submit"
               className="flex  justify-center rounded-md btn-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={() => {
-                if (data?.user) {
+                if (data?.user || session?.user) {
                   setModalOpen(true);
                 } else {
                   router.push("/login");
                 }
               }}
             >
-              {data?.user ? "Logout" : "Login"}
+              {data?.user || session?.user ? "Logout" : "Login"}
             </button>
             <button
               type="submit"
@@ -103,7 +120,8 @@ const Header = () => {
               Cart
               <FaShoppingCart className="ml-1" />
             </button>
-            <BiUser className="text-4xl ml-6 " />
+
+            <BiUser className="text-4xl " />
           </div>
         </nav>
         {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
@@ -146,9 +164,13 @@ const Header = () => {
                 <div class="space-y-2 py-6">
                   <div class="flex flex-col space-y-6">
                     {navItems.map((item) => (
-                      <CustomLink key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                      <CustomLink
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
                         {item.name}
-                      </CustomLink> 
+                      </CustomLink>
                     ))}
                   </div>
                 </div>
@@ -156,14 +178,14 @@ const Header = () => {
                   <button
                     class="block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-pink-700 hover:bg-gray-50"
                     onClick={() => {
-                      if (data?.user) {
+                      if (data?.user || session?.user) {
                         setModalOpen(true);
                       } else {
                         router.push("/login");
                       }
                     }}
                   >
-                    {data?.user ? "Logout" : "Login"}
+                    {data?.user || session?.user ? "Logout" : "Login"}
                   </button>
                 </div>
               </div>

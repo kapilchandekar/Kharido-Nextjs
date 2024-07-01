@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 import logo from "../../Assets/logo2.png";
 import { signInValidation } from "../../../utils/validation/Validation";
 import { useLoginUserMutation } from "@/lib/userSlice/userSlice";
 import "../../globals.css";
 
-const login = () => {
+const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const router = useRouter();
 
@@ -24,20 +25,23 @@ const login = () => {
       try {
         const response = await loginUser(values).unwrap();
         if (response.success) {
-          // Navigate to home page on successful login
           router.push("/");
           resetForm();
         }
-        // Optionally, handle setting the user ID in your component or global state
       } catch (err) {
         toast.error(err.data.error);
       }
     },
   });
+
+  const handleGoogleSignIn = async () => {
+    signIn("google", { callbackUrl: "/" });
+  };
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <Image className="mx-auto" src={logo} alt="Kharido" width={180} height={180}  />
+        <Image className="mx-auto" src={logo} alt="Kharido" width={180} height={180} />
 
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign In to your account
@@ -109,16 +113,15 @@ const login = () => {
 
           <div>
             <button
-              disabled=""
               type="submit"
-              class="btn-primary flex w-full items-center justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+              className="btn-primary flex w-full items-center justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               {isLoading ? (
                 <>
                   <svg
                     aria-hidden="true"
                     role="status"
-                    class="inline mr-3 w-4 h-4 text-white animate-spin"
+                    className="inline mr-3 w-4 h-4 text-white animate-spin"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -141,6 +144,15 @@ const login = () => {
           </div>
         </form>
 
+        <div className="mt-6">
+          <button
+            onClick={handleGoogleSignIn}
+            className="btn-primary flex w-full items-center justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            Sign in with Google
+          </button>
+        </div>
+
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}
           <Link href="/signup" className="font-semibold leading-6 primary-text">
@@ -151,4 +163,5 @@ const login = () => {
     </div>
   );
 };
-export default login;
+
+export default Login;
