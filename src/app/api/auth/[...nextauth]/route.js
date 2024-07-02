@@ -17,13 +17,8 @@ const authOptions = {
       },
     }),
   ],
-  // Additional configuration options
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
-
-// Named export for GET method
-export const GET = handler;
-
-// Named export for POST method
-export const POST = handler;
+export { handler as GET, handler as POST };
