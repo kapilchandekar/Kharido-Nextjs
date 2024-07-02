@@ -11,7 +11,7 @@ import "../../../globals.css";
 
 const resetPassword = ({ params }) => {
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
-  const router = useRouter()
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +21,6 @@ const resetPassword = ({ params }) => {
     },
     // validationSchema: emailValidation,
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
       try {
         const response = await resetPassword(values).unwrap();
 
