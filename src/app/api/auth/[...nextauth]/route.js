@@ -18,6 +18,18 @@ const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user = token.user;
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (account?.provider && profile) {
+        token.user = profile;
+      }
+      return token;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
