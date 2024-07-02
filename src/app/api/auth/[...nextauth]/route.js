@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 const authOptions = {
   providers: [
     GoogleProvider({
-      clientId:"git 792878688720-f6e08utj4cpjojgov4ri9661v4e40hhm.apps.googleusercontent.com",
+      clientId:"792878688720-f6e08utj4cpjojgov4ri9661v4e40hhm.apps.googleusercontent.com",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
