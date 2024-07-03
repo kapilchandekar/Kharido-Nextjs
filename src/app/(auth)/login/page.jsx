@@ -33,11 +33,10 @@ const Login = () => {
       }
     },
   });
-
+  console.log("login");
   const handleGoogleSignIn = async () => {
     signIn("google", { callbackUrl: "/" });
   };
-  console.log("key", process.env.GOOGLE_ClIENT_ID);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
