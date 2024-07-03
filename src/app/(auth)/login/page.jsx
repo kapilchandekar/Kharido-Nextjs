@@ -33,7 +33,6 @@ const Login = () => {
       }
     },
   });
-  console.log("login");
   const handleGoogleSignIn = async () => {
     signIn("google", { callbackUrl: "/" });
   };
