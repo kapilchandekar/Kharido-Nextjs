@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   GET_PRODUCTS_URL,
   GET_PRODUCT_DETAILS_URL,
+  SEARCH_PRODUCT_URL,
 } from "@/constant/endpoints";
 import { BASE_URL } from "@/http";
 
@@ -18,7 +19,10 @@ export const getProductsApi = createApi({
     getProductById: builder.query({
       query: (id) => `${GET_PRODUCT_DETAILS_URL}/${id}`,
     }),
+    searchProducts: builder.query({
+      query: (query) => `${SEARCH_PRODUCT_URL}?query=${query}`,
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery } = getProductsApi;
+export const { useGetProductsQuery, useGetProductByIdQuery, useSearchProductsQuery } = getProductsApi;

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { BiUser } from "react-icons/bi";
 import { useSession, signOut } from "next-auth/react";
 
+import Search from "./Search";
 import logo from "../../Assets/logo2.png";
 import SideBar from "../sideBar/sideBar";
 import AlertModal from "../modal/alertModal";
@@ -42,18 +43,18 @@ const Header = () => {
   return (
     <div>
       <header>
-        {session?.user  && (
+        {session?.user && (
           <div className="text-center mt-2 primary-text">
             Welcome, {session?.user?.name}{" "}
           </div>
         )}
-        {data?.user  && (
+        {data?.user && (
           <div className="text-center mt-2 primary-text">
             Welcome, {data?.user?.username}{" "}
           </div>
         )}
         <nav
-          class=" mx-auto flex items-center justify-between bgitems-center  py-6  lg:px-8"
+          class=" mx-auto flex items-center justify-between bgitems-center  py-4  lg:px-8"
           aria-label="Global"
         >
           <div class="flex lg:flex-1">
@@ -192,6 +193,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <Search />
       </header>
       <AlertModal
         open={modalOpen}

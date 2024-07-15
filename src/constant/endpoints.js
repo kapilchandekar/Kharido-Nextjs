@@ -9,3 +9,4 @@ export const RESET_PASSWORD_URL = "/resetPassword";
 // user
 export const GET_PRODUCTS_URL = "/products";
 export const GET_PRODUCT_DETAILS_URL = "/product";
+export const SEARCH_PRODUCT_URL = "/search";
