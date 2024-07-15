@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -193,7 +193,9 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <Search />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Search />
+        </Suspense>
       </header>
       <AlertModal
         open={modalOpen}
