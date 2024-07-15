@@ -17,7 +17,7 @@ import "../../globals.css";
 import CustomLink from "./CustomLink";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({setKey}) => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -194,7 +194,7 @@ const Header = () => {
           </div>
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <Search />
+          <Search setKey={setKey} />
         </Suspense>
       </header>
       <AlertModal

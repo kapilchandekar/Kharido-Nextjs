@@ -1,10 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 
-import { useSearchQuery } from "@/hooks/useSearchQuery";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import StoreProvider from "../StoreProvider";
@@ -19,7 +19,7 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({ children }) {
-  const query = useSearchQuery();
+  const [query, setKey] = useState("");
 
   return (
     <html lang="en">
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <StoreProvider>
             <Toaster />
-            <Header />
+            <Header setKey={setKey} />
             {query ? <FilterProducts query={query} /> : children}
             <Footer />
           </StoreProvider>

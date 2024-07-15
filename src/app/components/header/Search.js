@@ -1,12 +1,16 @@
 "use client"
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useSearchQuery } from "@/hooks/useSearchQuery";
+import { useRouter } from "next/navigation";
 
 
 
-const Search = () => {
+const Search = ({setKey}) => {
   const router = useRouter();
+  const key = useSearchQuery()
   const [query, setQuery] = useState('');
+  
+  setKey(key)
  
 
   useEffect(() => {
