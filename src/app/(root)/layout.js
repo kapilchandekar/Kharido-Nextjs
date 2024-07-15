@@ -28,15 +28,11 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <StoreProvider>
             <Toaster />
-            <Header />
-            {query ? (
-              <Suspense fallback={<div>Loading...</div>}>
-                <FilterProducts query={query} />
-              </Suspense>
-            ) : (
-              children
-            )}
-            <Footer />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Header />
+              {query ? <FilterProducts query={query} /> : children}
+              <Footer />
+            </Suspense>
           </StoreProvider>
         </SessionProvider>
       </body>
